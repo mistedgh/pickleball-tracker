@@ -10,11 +10,9 @@ The recommended first deliverable is a bench prototype with two cameras near the
 
 | Item | Project baseline |
 |---|---|
-| Team | Three sophomore ECE students |
-| New spending | $50 total for the initial build; assumed US dollars |
-| Available | Laptop, ESP32 board, paddle, printer |
-| Printer assumption | Assumed 3D printer; if it is a paper printer, use a cardboard or scrap-plastic fixture first |
-| Timing | Start immediately; flexible personal project, with an initial demonstrator in approximately four weeks |
+| Team | Two sophomore ECE students |
+| New spending | $50 total for the initial build|
+| Available | Laptop, ESP32 board, paddle, 3D printer access |
 | Coverage | One face initially; both faces are a later extension |
 | Long-term objective | Camera processing and ML inference on the paddle accessory; wireless wrist feedback |
 
@@ -245,9 +243,9 @@ Plan around four weeks to the first documented bench demonstrator at roughly 4â€
 
 | Person | Primary work | Deliverable | Reviewer |
 |---|---|---|---|
-| A | Vision, calibration, data processing, later ML | Localization pipeline and reproducible evaluation | C |
+| A | Vision, calibration, data processing, later ML | Localization pipeline and reproducible evaluation | B |
 | B | ESP32 firmware, motor drive, protocol, later radio and power | Haptic subsystem and timing measurements | A |
-| C | Mounting, optical coverage, test fixture, documentation | Adjustable mount, ground-truth method, integration evidence | B |
+| Either | Mounting, optical coverage, test fixture, documentation | Adjustable mount, ground-truth method, integration evidence | Either |
 
 Rotate one task each week so everyone can explain the entire system. Keep subsystem ownership for accountability, but review circuits, data labels, and evaluation scripts together.
 

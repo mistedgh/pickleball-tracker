@@ -1,6 +1,6 @@
 # Pickleball hit area tracker
 
-## 1 Project brief
+## 1. Project brief
 
 Build a removable optical accessory that estimates where a ball contacts one pickleball paddle face, reports distance from a chosen center, and gives a short vibration at the player's wrist for a centered contact. Develop it as a three-person sophomore ECE portfolio project, starting with $50 in new spending and progressing toward local machine learning on the paddle accessory.
 
@@ -30,7 +30,7 @@ The first release covers one paddle, a known ball type, controlled indoor lighti
 
 Prepared October 28, 2026. All numeric performance thresholds below are proposed engineering targets, not measured results.
 
-## 2 Camera placement and system architecture
+## 2. Camera placement and system architecture
 
 Place both cameras at opposite sides of the throat on the same active face, aimed into an overlapping volume above that face. A pair split between the front and back would generally not see the same approaching ball and would not form the intended stereo pair.
 
@@ -52,7 +52,7 @@ Camera L and camera R send images to the laptop. The laptop performs calibration
 
 Both cameras and the processing electronics sit on the paddle accessory. Local firmware captures images, performs vision or ML inference, estimates contact position, and sends an event to a separate wrist receiver. The receiver drives a reusable motor pod attached with a replaceable adhesive patch. A laptop is used for development, training, and optional data download; it is not required during the final demonstration.
 
-## 3 Feasibility and the experiments that matter
+## 3. Feasibility and the experiments that matter
 
 The difficult problem is seeing and timing a fast ball near contact. ML cannot reconstruct trustworthy measurements from frames that never captured the event. Cheap cameras are useful for learning geometry and collecting slow-contact data; that does not establish suitability for normal play.
 
@@ -81,7 +81,7 @@ For slow tests, choose the maximum allowed speed from the measured timing uncert
 
 Keep the throat-mounted concept only if both views resolve the ball at the selected test locations. If it fails, adjust lens height, angle, or baseline. If no usable arrangement exists, record the visibility evidence and try a larger bench fixture or a different optical path. Do not conceal the problem with a classifier trained on a narrow set of easy positions.
 
-## 4 Goal list and acceptance criteria
+## 4. Goal list and acceptance criteria
 
 All goals start open. Assign one named owner and a reviewer before work begins. Meet the bench goals before committing to normal-speed play. Report failures and rejected measurements along with successful results.
 
@@ -107,7 +107,7 @@ For a 25 mm centered radius, start with a 10 mm boundary uncertainty band: posit
 
 Report classification accuracy with its denominator, the uncertain fraction, and total valid coverage. Do not improve the apparent result by quietly discarding difficult contacts. If error remains too large for a 25 mm target region, demonstrate coarse zones until localization improves.
 
-## 5 Parts and a realistic 50 dollar budget
+## 5. Parts and a realistic 50 dollar budget
 
 Borrow two suitable cameras to test geometry immediately. Otherwise, two XIAO ESP32-S3 Sense boards are compact candidates for the prototype and later local-ML experiments. Each supplies one camera; the existing ESP32 operates the wrist motor.
 
@@ -137,7 +137,7 @@ Borrowed USB webcams simplify laptop capture but may be bulky, unsynchronized, o
 
 For a later funded optical upgrade, investigate a hardware-synchronized global-shutter pair such as an Arducam OV9281 stereo kit. Its published modes differ by kit and resolution; confirm the exact host, driver, trigger support, lens, and total system cost before selecting it. A camera multiplexer that alternates views is not a simultaneous stereo system. [S8]
 
-## 6 Camera software and contact localization
+## 6. Camera software and contact localization
 
 Build a conventional vision baseline before a neural network. Keep image capture, calibration, ball detection, localization, event logic, and the feedback interface as separate modules so that a future ML detector can replace only the component it improves.
 
@@ -165,7 +165,7 @@ Use SEARCH, TRACK, CONTACT_CANDIDATE, CONFIRMED, and COOLDOWN states. A held bal
 
 An optional piezo or accelerometer may mark event timing during development. It does not provide the optical contact location. Keep an optical-only evaluation and a hybrid evaluation separate, and do not describe hybrid performance as purely optical.
 
-## 7 Wrist feedback and electronics
+## 7. Wrist feedback and electronics
 
 The first sticker is a small motor in a thin insulating holder, attached with replaceable skin-contact adhesive. The existing ESP32 and motor driver can remain on the bench or on a cuff, with a short flexible wire to the patch. A self-contained wireless sticker also needs a radio, power source, protection, and packaging; it is a later hardware project.
 
@@ -189,7 +189,7 @@ First test the motor on the bench, then briefly on willing team members using an
 
 Measure power during capture, inference, radio activity, and vibration. Estimate runtime from measured average current and battery capacity with a reserve, then verify it experimentally. Mount mass and balance change are also design measurements, not merely packaging concerns.
 
-## 8 Local machine learning on the accessory
+## 8. Local machine learning on the accessory
 
 The long-term architecture should make the sensing-to-decision path local to the paddle. Training can remain on a laptop. Only the small hit-result message needs to cross the wireless link to the wrist. Running a model on the wrist while images are processed on the laptop would not meet this objective.
 
@@ -215,7 +215,7 @@ Split data by session, and keep every frame from the same event in the same spli
 | Two-camera local system | Both streams contribute, capture timing is characterized, fusion runs locally, and the laptop can be disconnected |
 | Wearable session | Powered accessory sends real event decisions to the wrist for a documented test duration |
 
-## 9 Embedded architecture and performance budget
+## 9. Embedded architecture and performance budget
 
 Two camera boards provide a practical learning path, but they do not automatically form a synchronized stereo instrument. The final architecture remains a design decision driven by measured timing and image quality.
 
@@ -239,7 +239,7 @@ Espressif's camera driver documentation warns that some image formats and Wi-Fi 
 
 For a later portable version, propose a 30-minute session target and a sub-150 ms 90th-percentile feedback target, then revise them using measurements and user testing. Do not commit to a tiny battery or a paddle mass target before weighing components and measuring current. Record bare and modified paddle mass and balance point so the tradeoff is visible.
 
-## 10 Team ownership and a fast build schedule
+## 10. Team ownership and a fast build schedule
 
 Plan around four weeks to the first documented bench demonstrator at roughly 4–6 hours per person per week. This is a planning estimate, not a deadline. Shipping delays and camera visibility may change it. Use two short coordination meetings and one integrated test each week.
 
@@ -271,7 +271,7 @@ If only a weekend is available, demonstrate two-view stationary ball placement, 
 
 Freeze millimeter units, coordinate direction, event IDs, result labels, and uncertainty behavior before parallel work. Keep calibration files versioned with hardware revisions. Maintain one integration branch or a simple pull-request workflow; require another teammate to reproduce a result before marking a milestone complete.
 
-## 11 Verification and evidence collection
+## 11. Verification and evidence collection
 
 Use independent ground truth. The same algorithm that predicts a contact point cannot also provide the labels used to claim its accuracy. Keep calibration locations separate from evaluation locations, and preserve all attempted trials.
 
@@ -299,7 +299,7 @@ Store session ID, event ID, mode (static/slow impact/fast impact), camera IDs, c
 
 Plot a paddle heatmap of spatial error, a confusion matrix, error versus speed, and latency distribution. Show results by lighting and camera configuration. Include sample failures and the number of attempts excluded because ground truth was unavailable.
 
-## 12 Risks and design decisions
+## 12. Risks and design decisions
 
 | Risk | Early evidence | Response |
 |---|---|---|
@@ -326,7 +326,7 @@ The clearest extension is a separate overlapping camera pair for each face, incr
 
 Keep this version framed as a training and research accessory. Competition use needs a separate review against the applicable current event and equipment rules; no tournament eligibility is claimed. USA Pickleball maintains official rule and equipment resources. [S10]
 
-## 13 Portfolio deliverables and the next actions
+## 13. Portfolio deliverables and the next actions
 
 The strongest résumé result will be a working prototype accompanied by measured error, coverage, latency, cost, and an explanation of the tradeoffs. A visible limit, such as slow-speed operation, is useful engineering evidence when it is measured and clearly stated.
 
@@ -362,7 +362,7 @@ For a later verified milestone: “Deployed a quantized vision model on [process
 - [ ] Capture a ball held at center and at four off-center locations from the proposed camera viewpoints.
 - [ ] Create the shared repository and commit scope, budget, protocol, and experiment photos.
 
-## 14 Sources and technical reading
+## 14. Sources and technical reading
 
 These primary sources support the named parts and software capabilities. Prices are snapshots from October 28, 2026; check the selected variant, stock, tax, shipping, and compatibility before ordering. Geometry choices, goals, budget allowances, and the build schedule are project recommendations to be validated experimentally.
 
